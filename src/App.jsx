@@ -22,9 +22,54 @@ function App() {
   const [rsvpOpen, setRsvpOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [selectedMotif, setSelectedMotif] = useState(motifColors[0])
+  const [inviteOpening, setInviteOpening] = useState(false)
+  const [inviteEntered, setInviteEntered] = useState(false)
+
+  function openInvitation() {
+    setInviteOpening(true)
+    window.setTimeout(() => setInviteEntered(true), 1450)
+  }
 
   return (
-    <main>
+    <main className={inviteEntered ? 'invite-entered' : ''}>
+      {!inviteEntered && (
+        <section
+          className={`envelope-intro${inviteOpening ? ' is-opening' : ''}`}
+          aria-label="Wedding invitation envelope"
+        >
+          <div className="intro-glow" />
+          <div className="intro-frame" aria-hidden="true" />
+          <div className="botanical botanical-left" aria-hidden="true">
+            <i /><i /><i /><i /><i /><i /><i />
+          </div>
+          <div className="botanical botanical-right" aria-hidden="true">
+            <i /><i /><i /><i /><i /><i /><i />
+          </div>
+          <div className="floating-petal petal-one" aria-hidden="true" />
+          <div className="floating-petal petal-two" aria-hidden="true" />
+          <div className="floating-petal petal-three" aria-hidden="true" />
+          <button
+            className="envelope"
+            type="button"
+            onClick={openInvitation}
+            disabled={inviteOpening}
+            aria-label="Break the seal and open the invitation"
+          >
+            <span className="envelope-back" />
+            <span className="invitation-letter">
+              <small>Together with their families</small>
+              <strong>Carlo <i>&amp;</i> Laarni</strong>
+            </span>
+            <span className="envelope-flap" />
+            <span className="envelope-front" />
+            <span className="wax-seal" aria-hidden="true">
+              <b>C <i>&amp;</i> L</b>
+            </span>
+            <span className="seal-hint">Break the seal</span>
+          </button>
+        </section>
+      )}
+
       <nav className="top-nav" aria-label="Invitation navigation">
         <a className="monogram" href="#home" aria-label="Carlo and Laarni home">C <span>&</span> L</a>
         <div className="nav-links">
